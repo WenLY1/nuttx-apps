@@ -21,3 +21,4 @@
 nuttx_add_subdirectory()
 
 nuttx_generate_kconfig(MENUDESC "Interpreters")
+add_subdirectory(quickjs)
