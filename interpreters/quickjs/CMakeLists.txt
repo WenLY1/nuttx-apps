@@ -17,7 +17,6 @@ if(CONFIG_INTERPRETERS_QUICKJS)
   set(QUICKJS_INCDIR)
   set(QUICKJS_CSRCS)
   set(QUICKJS_SRCS)
-  set(QUICKAPP_DIR ${NUTTX_APPS_DIR}/frameworks/quickapp)
 
   if(CONFIG_INTERPRETERS_QUICKJS_MINI)
     list(APPEND QUICKJS_SRCS qjsmini.c)
@@ -117,34 +116,7 @@ if(CONFIG_INTERPRETERS_QUICKJS)
       libqjs)
   endif()
 
-  if(CONFIG_QUICKAPP_AIOTJSC)
-    message("build aiotjsc compiler....")
-    nuttx_add_application(
-      NAME
-      aiotjsc
-      INCLUDE_DIRECTORIES
-      ${QUICKAPP_COMMON_INCLUDES}
-      ${QUICKAPP_DIR}/src/jse/quickjs
-      ${QUICKAPP_DIR}/src/jse
-      ${QUICKAPP_DIR}/src
-      SRCS
-      ${QUICKAPP_DIR}/src/ajs_compile.cpp
-      ${QUICKAPP_DIR}/src/ajs_log.cpp
-      ${QUICKAPP_DIR}/src/jse/quickjs/jse_quickjs.cpp
-      DEFINITIONS
-      -DDEBUG
-      -DCONFIG_VERSION=${QUICKJS_VERSION}
-      -DAIOTJS_USE_QUICKJS
-      -DCONFIG_BIGNUM=${CONFIG_INTERPRETERS_QUICKJS_BIGNUM}
-      STACKSIZE
-      ${CONFIG_QUICKAPP_STACKSIZE}
-      PRIORITY
-      ${CONFIG_QUICKAPP_PRIORITY}
-      DEPENDS
-      libqjs)
-  endif(CONFIG_QUICKAPP_AIOTJSC)
-
-  set(AIOTJSC_PATH
+  set(QUICKJS_LIB
       ${CMAKE_CURRENT_BINARY_DIR}
       CACHE INTERNAL "")
 
